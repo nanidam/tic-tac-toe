@@ -11,6 +11,13 @@ const winner = ref<string>("");
 const cellClick = (number: number): void => {
   if (store.isGameOver || store.cellValues[number]) return;
 
+  const gameInfoJSON2: string | null = localStorage.getItem("gameInfo");
+
+  if (gameInfoJSON2) {
+    const gameInfo2: IGameInfo = JSON.parse(gameInfoJSON2);
+    store.isO = gameInfo2.isO;
+  }
+
   store.cellValues[number] = store.isO ? "O" : "X";
   store.isO = !store.isO; // Toggle between O & X
 
@@ -24,6 +31,7 @@ const cellClick = (number: number): void => {
     winsO: store.playerOWins,
     winsX: store.playerXWins,
     isGameOver: store.isGameOver,
+    isO: store.isO,
   };
 
   // Save the game info to local storage

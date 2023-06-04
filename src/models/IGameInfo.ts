@@ -5,4 +5,5 @@ export interface IGameInfo {
   winsO: number;
   winsX: number;
   isGameOver: boolean;
+  isO: boolean;
 }
